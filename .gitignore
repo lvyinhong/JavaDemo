@@ -1,0 +1,4 @@
+# Project exclude paths
+/activemq_demo/target/
+/out/
+/SpringDemo/target/

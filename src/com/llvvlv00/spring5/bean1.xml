@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--配置User对象创建-->
+    <bean id="user" class="com.llvvlv00.spring5.User"/>
+
+    <!--配置Book对象创建-->
+    <bean id="book" class="com.llvvlv00.spring5.Book" scope="prototype">
+        <!-- 使用property 完成属性注入 -->
+        <property name="bName" value="易筋经"/>
+        <property name="bAuthor" value="达摩老祖"/>
+    </bean>
+
+    <!--配置Orders对象创建-->
+    <bean id="orders" class="com.llvvlv00.spring5.Orders">
+        <constructor-arg name="oname" value="电脑"/>
+        <constructor-arg name="address" value="China"/>
+    </bean>
+
+    <!--属性值中包含null值-->
+    <bean id="book2" class="com.llvvlv00.spring5.Book">
+    <!-- 属性中包含特殊符号,使用CDATA-->
+        <property name="bName">
+            <value><![CDATA[<<南京>>]]></value>
+        </property>
+<!--        <property name="bName" value="九阳神功"/>-->
+        <property name="bAuthor" >
+            <null/>
+        </property>
+    </bean>
+
+    <!-- service和dao对象创建 -->
+    <bean id="userService" class="com.llvvlv00.spring5.service.UserService">
+        <!--注入userDao的对象-->
+        <property name="userDao" ref="userDaoImpl"/>
+    </bean>
+    <bean id="userDaoImpl" class="com.llvvlv00.spring5.dao.UserDao">
+
+    </bean>
+</beans>
